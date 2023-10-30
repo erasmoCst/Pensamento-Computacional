@@ -1,5 +1,4 @@
 import datetime
-
 from pessoa import Pessoa
 
 class Paciente(Pessoa):

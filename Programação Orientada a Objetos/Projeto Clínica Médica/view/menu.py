@@ -11,14 +11,13 @@ class Menu:
         print("0 - Sair")
         return input("Infome uma opção: ")
 
-    @staticmethod
-    def dadosPessoais():
+    def dadosPessoais(self):
         print(" -- Informe os Dados Pessoais --")
-        nome = input("Nome: ")
+        nome = input("Nome Completo: ")
         cpf = input("CPF: ")
         rg = input("RG: ")
-        genero = input("Gênero (M - Masculino\nF - Feminino)\n: ")
-        email = input("Cor: ")
+        genero = input("Gênero (M - Masculino F - Feminino): ")
+        email = input("E-mail: ")
         telefone = input("Telefone: ")
         dataNascimento = input("Data de Nascimento (DD/MM/YYYY): ")
 
@@ -26,9 +25,16 @@ class Menu:
 
     @staticmethod
     def dadosPaciente():
-        kilometragem = input("KM: ")
-        placa = input("Placa: ")
-        return kilometragem, placa
+        possuiConveneio = None
+        while not possuiConveneio:
+            possuiConvenio = input("O paciente possui convênio \n'S' - Sim\n'N' - Não\n")
+            if(possuiConvenio == "S"):
+                nomeConvenio = input("Convênio do paciente: ")
+            elif(possuiConvenio == "N"):
+                nomeConvenio = None
+            else:
+                print("Dado inválido! Informe 'S' para Sim e 'N' para não")
+        return possuiConvenio, nomeConvenio
 
     @staticmethod
     def dadosAutomovel():

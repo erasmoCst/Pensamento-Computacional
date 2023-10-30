@@ -1,6 +1,6 @@
 import datetime
-
 from funcionario import Funcionario
+
 
 class Medico(Funcionario):
     __slots__ = ["crm", "__valorConsulta", "especialidades"]
