@@ -1,8 +1,7 @@
-from controller.controller import ControleCriacao
+from controller.clinica import ControleClinica
+
+controle = 1
 
 while True:
-    opcao = Menu.menu()
-    if opcao == '0':
-        break
-    else:
-        ControleCriacao.opcoesMenu(opcao)
+    if controle == 1:
+        ControleClinica.run()

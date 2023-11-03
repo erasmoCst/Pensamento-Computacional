@@ -1,6 +1,6 @@
 class Menu:
     @staticmethod
-    def menu():
+    def menuPrincipal():
         print(" -- Menu --")
         print("1 - Cadastrar Paciente")
         print("2 - Cadastrar Funcionário")
@@ -11,7 +11,8 @@ class Menu:
         print("0 - Sair")
         return input("Infome uma opção: ")
 
-    def dadosPessoais(self):
+    @staticmethod
+    def dadosPessoais():
         print(" -- Informe os Dados Pessoais --")
         nome = input("Nome Completo: ")
         cpf = input("CPF: ")
@@ -25,40 +26,24 @@ class Menu:
 
     @staticmethod
     def dadosPaciente():
-        possuiConveneio = None
-        while not possuiConveneio:
-            possuiConvenio = input("O paciente possui convênio \n'S' - Sim\n'N' - Não\n")
-            if(possuiConvenio == "S"):
-                nomeConvenio = input("Convênio do paciente: ")
-            elif(possuiConvenio == "N"):
-                nomeConvenio = None
-            else:
-                print("Dado inválido! Informe 'S' para Sim e 'N' para não")
+        possuiConvenio = input("O paciente possui convênio? \n'S' - Sim\n'N' - Não\n").upper()
+        if(possuiConvenio == "S"):
+            nomeConvenio = input("Convênio do paciente: ")
+        elif(possuiConvenio == "N"):
+            nomeConvenio = "-"
+        else:
+            print("Dado inválido! Informe 'S' para Sim e 'N' para não")
         return possuiConvenio, nomeConvenio
 
     @staticmethod
-    def dadosAutomovel():
-        motorizacao = float(input("Motorizacao: "))
-        portas = int(input("Portas: "))
-
-        return motorizacao, portas
-
+    def dadosFuncionario():
+        jornada = input("Jornada de Trabalho: ")
+        salario = input("Salário: ")
+        return jornada, salario
+    
     @staticmethod
-    def mostraVeiculo(lista: list):
-        for a in lista:
-            print(a)
-
-    @staticmethod
-    def dadosCaminhao():
-        cargaMaxima = float(input("Carga Máxima: "))
-        eixos = int(input("Eixos: "))
-
-        return cargaMaxima, eixos
-
-    @staticmethod
-    def criaOnibus():
-        print("Recupera dados do Onibus")
-
-    @staticmethod
-    def criaHelicoptero():
-        print("Recupera dados do Helicoptero")
+    def dadosMedico():
+        crm = input("CRM: ")
+        valorConsulta = input("Valor da Consulta: ")
+        especialidade = input("Especialidade: ")
+        return crm, valorConsulta, especialidade
