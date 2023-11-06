@@ -1,5 +1,5 @@
 import datetime
-from pessoa import Pessoa
+from models.pessoa import Pessoa
 
 class Funcionario(Pessoa):
     __slots__ = ["__salarioMensal", "jornadaTrabalho"]
@@ -10,4 +10,7 @@ class Funcionario(Pessoa):
         self.jornadaTrabalho: int = jornadaTrabalho
 
     def __str__(self):
-        return f"Jornada de trabalho: {self.jornadaTrabalho}"
+        return f"Cód.: {self.codigo}\n" \
+               f"Nome: {self.nome}\n" \
+               f"Gênero: {'Masculino' if self.sexo == 'M' else 'Feminino'}\n" \
+               f"Jornada de Trabalho: {self.jornadaTrabalho}\n"

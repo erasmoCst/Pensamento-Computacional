@@ -1,6 +1,6 @@
 import datetime
 
-class Pessoa:
+class Pessoa(object):
     codigo: int = 1
     # __slots__ = ["codigo", "nome", "__cpf", "__rg", "sexo", "__email", "__telefone", "dataNascimento"]
 
