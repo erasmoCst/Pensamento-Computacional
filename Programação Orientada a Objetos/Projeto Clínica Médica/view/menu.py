@@ -23,9 +23,11 @@ class Menu:
         cpf: str = input("CPF: ")
         rg: str = input("RG: ")
         genero: str = input("Gênero \nM - Masculino\nF - Feminino\n").upper()
+
         while genero not in ("M", "F"):
             print("Dado inválido! Informe 'M' para Masculino e 'F' para Feminino")
             genero = input("Gênero \nM - Masculino\nF - Feminino\n").upper()
+
         email: str = input("E-mail: ")
         telefone: str = input("Telefone: ")
         dataNascimento: datetime.date = input("Data de Nascimento (DD/MM/AAAA): ")
@@ -36,6 +38,7 @@ class Menu:
     def dadosPaciente():
         print(" -- Informe os Dados do Paciênte --")
         convenio: str = None
+
         while convenio not in ("S", "N"):
             convenio = input("O paciente possui convênio? \n'S' - Sim\n'N' - Não\n").upper()
             if (convenio == "S"):
@@ -54,19 +57,21 @@ class Menu:
         jornada: str = input("Jornada de Trabalho: ")
         salario: str = input("Salário: ")
         return jornada, salario
-    
+
     @staticmethod
     def dadosMedico():
         print(" -- Informe os Dados do Médico --")
-        especialidades: list = []
         especialidade: str = None
+        especialidades: list = []
 
         crm: str = input("CRM: ")
         valorConsulta: float = input("Valor da Consulta: ")
 
         while especialidade != 'Sair':
             especialidade = input("Especialidade (digite 'sair' para finalizar o cadastro): ").capitalize()
-            especialidades.append(especialidade)
+
+            if especialidade != 'Sair':
+                especialidades.append(especialidade)
         return crm, valorConsulta, especialidades
 
     @staticmethod
@@ -82,14 +87,18 @@ class Menu:
     @staticmethod
     def dadosPrescricao():
         print(" -- Informe os Dados da Prescrição Médica --")
+        exame: str = None
         exames: list = []
+        medicamento: str = None
         medicamentos: list = []
 
         data: datetime.date = input("Informe a data da prescrição (DD/MM/AAAA): ")
         while exame != 'Sair':
             exame: str = input("Exames (digite 'sair' para finalizar o cadastro): ").capitalize()
-            exames.append(exame)
+            if exame != 'Sair':
+                exames.append(exame)
         while medicamento != 'Sair':
             medicamento: str = input("Medicamentos (digite 'sair' para finalizar o cadastro): ").capitalize()
-            medicamentos.append(medicamento)
+            if medicamento != 'Sair':
+                medicamentos.append(medicamento)
         return data, exames, medicamentos

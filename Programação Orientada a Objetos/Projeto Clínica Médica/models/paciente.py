@@ -9,7 +9,6 @@ class Paciente(Pessoa):
         self.possuiConvenio: bool = possuiConvenio
         self.nomeConvenio: str = nomeConvenio
 
-
     def __str__(self):
         return f"Cód.: {self.codigo}\n" \
                f"Nome: {self.nome}\n" \

@@ -3,11 +3,13 @@ from models.paciente import Paciente
 from models.funcionario import Funcionario
 from models.medico import Medico
 from models.consulta import Consulta
+from models.prescricao import Prescricao
 
 pacientes: list = []
 funcionarios: list = []
 medicos: list = []
-consultas: list =  []
+consultas: list = []
+prescricoes: list = []
 
 class ControleClinica:
 
@@ -28,10 +30,10 @@ class ControleClinica:
             case '2': cls.criaFuncionario()
             case '3': cls.criaMedico()
             case '4': cls.criaConsulta()
-            case '5': cls.listaPaciente()
-            case '6': cls.listaFuncionario()
-            case '7':  cls.listaMedico()
-            case '8':  cls.listaConsulta()
+            case '5': cls.listaCadastro("Paciente", pacientes)
+            case '6': cls.listaCadastro("Funcionario", funcionarios)
+            case '7': cls.listaCadastro("Médico", medicos)
+            case '8': cls.listaCadastro("Consulta", consultas)
             case _:
                 print("\n Opção Inválida!\n")
 
@@ -45,15 +47,6 @@ class ControleClinica:
         print("\nCliente Cadastrado com Sucesso!\n")
 
     @staticmethod
-    def listaPaciente():
-        if not len(pacientes):
-            print("\n -- Nenhum paciente cadastrado --\n")
-        else:
-            print(" -- Lista de Pacientes --")
-            for paciente in pacientes:
-                print(paciente)
-
-    @staticmethod
     def criaFuncionario():
         nome, cpf, rg, genero, email, telefone, dataNascimento = Menu.dadosPessoais()
         jornada, salario = Menu.dadosFuncionario()
@@ -62,14 +55,6 @@ class ControleClinica:
         funcionarios.append(funcionario)
         print("\nFuncionario Cadastrado com Sucesso!\n")
 
-    @staticmethod
-    def listaFuncionario():
-        if not len(funcionarios):
-            print("\n -- Nenhum Funcionario cadastrado --\n")
-        else:
-            print(" -- Lista de Funcionarios --")
-            for funcionario in funcionarios:
-                print(funcionario)
 
     @staticmethod
     def criaMedico():
@@ -81,47 +66,29 @@ class ControleClinica:
         medicos.append(medico)
         print("\nMedico Cadastrado com Sucesso!\n")
 
-    @staticmethod
-    def listaMedico():
-        if not len(medicos):
-            print("\n -- Nenhum Medico cadastrado --\n")
-        else:
-            print(" -- Lista de Médicos --")
-            for medico in medicos:
-                print(medico)
-
-    @staticmethod
-    def criaConsulta():
+    @classmethod
+    def criaConsulta(cls):
         medico, paciente, data = Menu.dadosConsulta()
-
-        consulta = Consulta(medico, paciente, data)
+        prescricao = cls.criaPrescricao()
+        consulta = Consulta(medico, paciente, data, prescricao)
         consultas.append(consulta)
+
         print("\nConsulta Cadastrado com Sucesso!\n")
 
     @staticmethod
-    def listaConsulta():
-        if not len(consultas):
-            print("\n -- Nenhuma Consulta cadastrada --\n")
-        else:
-            print(" -- Lista de Consultas --")
-            for consulta in consultas:
-                print(consulta)
-
-    @staticmethod
     def criaPrescricao():
-        nome, cpf, rg, genero, email, telefone, dataNascimento = Menu.dadosPessoais()
-        jornada, salario = Menu.dadosFuncionario()
-        crm, valorConsulta, especialidade = Menu.dadosMedico()
+        data, exames, medicamentos = Menu.dadosPrescricao()
 
-        medico = Medico(nome, cpf, rg, genero, email, telefone, dataNascimento, jornada, salario, crm, valorConsulta, especialidade)
-        medicos.append(medico)
-        print("\nMedico Cadastrado com Sucesso!\n")
+        prescricao = Prescricao(data, exames, medicamentos)
+        prescricoes.append(prescricao)
+        print("\nPrescricao Cadastrada com Sucesso!\n")
+        return prescricao
 
     @staticmethod
-    def listaPrescricao():
-        if not len(consultas):
-            print("\n -- Nenhuma Consulta cadastrada --\n")
+    def listaCadastro(nomeCadastro: str, cadastro: list):
+        if not len(cadastro):
+            print(f"\n -- Nenhum {nomeCadastro} cadastrado --\n")
         else:
-            print(" -- Lista de Consultas --")
-            for consulta in consultas:
-                print(consulta)
+            print(f" -- Lista de {nomeCadastro}s --")
+            for item in cadastro:
+                print(item)
