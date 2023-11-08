@@ -1,4 +1,6 @@
 from controller.clinica import ControleClinica
 
-while True:
-    ControleClinica.run()
+run = True
+
+while run:
+    run = ControleClinica.run()

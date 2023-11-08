@@ -4,12 +4,14 @@ from models.funcionario import Funcionario
 from models.medico import Medico
 from models.consulta import Consulta
 from models.prescricao import Prescricao
+from models.cobranca import Cobranca
 
 pacientes: list = []
 funcionarios: list = []
 medicos: list = []
 consultas: list = []
 prescricoes: list = []
+cobrancas: list = []
 
 class ControleClinica:
 
@@ -19,13 +21,14 @@ class ControleClinica:
             opcao = Menu.menuPrincipal()
 
             if opcao == '0':
-                break
+                return False
 
             cls.opcoesMenu(opcao)
 
     @classmethod
     def opcoesMenu(cls, opcao):
         match opcao:
+            case '0': return 0
             case '1': cls.criaPaciente()
             case '2': cls.criaFuncionario()
             case '3': cls.criaMedico()
@@ -34,6 +37,7 @@ class ControleClinica:
             case '6': cls.listaCadastro("Funcionario", funcionarios)
             case '7': cls.listaCadastro("Médico", medicos)
             case '8': cls.listaCadastro("Consulta", consultas)
+            case '9': cls.listaCadastro("Cobrança", cobrancas)
             case _:
                 print("\n Opção Inválida!\n")
 
@@ -68,15 +72,28 @@ class ControleClinica:
 
     @classmethod
     def criaConsulta(cls):
-        medico, paciente, data = Menu.dadosConsulta()
+        medico, paciente, data, dataCobranca, valorTotal = Menu.dadosConsulta()
         prescricao = cls.criaPrescricao()
         consulta = Consulta(medico, paciente, data, prescricao)
+        cobranca = Cobranca(dataCobranca, valorTotal, consulta)
+
         consultas.append(consulta)
+        cobrancas.append(cobranca)
 
         print("\nConsulta Cadastrado com Sucesso!\n")
 
+
     @staticmethod
     def criaPrescricao():
+        data, exames, medicamentos = Menu.dadosPrescricao()
+
+        prescricao = Prescricao(data, exames, medicamentos)
+        prescricoes.append(prescricao)
+        print("\nPrescricao Cadastrada com Sucesso!\n")
+        return prescricao
+
+    @staticmethod
+    def criaCobranca():
         data, exames, medicamentos = Menu.dadosPrescricao()
 
         prescricao = Prescricao(data, exames, medicamentos)

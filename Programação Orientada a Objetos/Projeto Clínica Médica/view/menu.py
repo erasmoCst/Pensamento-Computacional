@@ -13,6 +13,7 @@ class Menu:
         print("6 - Listar Funcionários")
         print("7 - Listar Médicos")
         print("8 - Listar Consultas")
+        print("9 - Listar Cobranças")
         print("0 - Sair")
         return input("Infome uma opção: ")
 
@@ -54,8 +55,10 @@ class Menu:
     @staticmethod
     def dadosFuncionario():
         print(" -- Informe os Dados do Funcionário --")
-        jornada: str = input("Jornada de Trabalho: ")
+        entrada = datetime.time(input("Horário de Entrada: "))
+        saida = datetime.time(input("Horário de Saída: "))
         salario: str = input("Salário: ")
+        jornada: str = f"{entrada}h às {saida}h"
         return jornada, salario
 
     @staticmethod
@@ -65,7 +68,7 @@ class Menu:
         especialidades: list = []
 
         crm: str = input("CRM: ")
-        valorConsulta: float = input("Valor da Consulta: ")
+        valorConsulta: float = input("Valor da Consulta: R$")
 
         while especialidade != 'Sair':
             especialidade = input("Especialidade (digite 'sair' para finalizar o cadastro): ").capitalize()
@@ -76,13 +79,26 @@ class Menu:
 
     @staticmethod
     def dadosConsulta():
+        dataCobranca: datetime.date = None
+        valorTotal: float = None
+        criarCobranca: str = None
+
         print(" -- Informe os Dados da Consulta --")
 
         medico: str = input("Informe o Nome do Médico: ")
         paciente: str = input("Informe o Nome do Paciente: ")
         data: datetime = input("Informe a data e hora da consulta (DD/MM/AAAA HH:MM:SS): ")
 
-        return medico, paciente, data
+        while criarCobranca not in ("S", "N"):
+            criarCobranca = input("\nDeseja criar a cobrança desta consulta?\n'S' - Sim\n'N' - Não\n").upper()
+            if (criarCobranca == "S"):
+                dataCobranca = input("Informe a data da cobrança(DD/MM/AAAA): ")
+                valorTotal = float(input("Informe o valor total da consulta: "))
+                return medico, paciente, data, dataCobranca, valorTotal
+            elif (criarCobranca == "N"):
+                return medico, paciente, data, dataCobranca, valorTotal
+            else:
+                print("Dado inválido! Informe 'S' para Sim e 'N' para não")
 
     @staticmethod
     def dadosPrescricao():
