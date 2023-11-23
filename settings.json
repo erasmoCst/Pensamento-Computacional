@@ -1,0 +1,14 @@
+    /**
+     * @file "settings.json"
+     * @desc "This is what my configuration looks like" */
+
+    "git-autoconfig.configList": [
+         {
+              "user.email": "erasmoc@alunos.utfpr.edu.br",
+              "user.name": "ErasusUTF"
+          },
+          {
+              "user.email": "erasmocst.contato@gmail.com",
+              "user.name": "ErasmoCst"
+          }
+    ]
